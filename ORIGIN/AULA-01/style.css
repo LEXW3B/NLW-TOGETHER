@@ -5,6 +5,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+ul{
+    list-style: none;
+}
 a{
     text-decoration: none;
 }
@@ -13,16 +16,20 @@ img{
     height: auto;
 }
 /* ======VARIABLES====== */
-:root{
+:root {
+    --header-height: 4.5rem;
+  
+    /* colors */
     --hue: 159;
-    /*HSLcolor mode*/
-    --base-color: hsl(var(var(--hue) 36% 57%));
-    --base-color-second: hsl(var(var(--hue) 65% 88%));
-    --base-color-alt: hsl(var(var(--hue) 57% 53%));
-    --title-color: hsl(var(var(--hue) 41% 10%));
-    --text-color:(hsl( 0 0% 98%));
-    --body-color: hsl( 0 0% 98%);
-}
+    /* HSL color mode */
+    --base-color: hsl(var(--hue) 36% 57%);
+    --base-color-second: hsl(var(--hue) 65% 88%);
+    --base-color-alt: hsl(var(--hue) 57% 53%);
+    --title-color: hsl(var(--hue) 41% 10%);
+    --text-color: hsl(0 0% 46%);
+    --text-color-light: hsl(0 0% 98%);
+    --body-color: hsl(0 0% 98%);
+  }
 /* ======BASE====== */
 body{
     font: 400 1rem "DM Sans", sans-serif;
@@ -31,35 +38,36 @@ body{
 
     -webkit-font-smoothing: antialiased;
 }
-h1{
+.title{
     font: 700 1.875rem "Poppins", sans-serif;
     color: var(--title-color);
     -webkit-font-smoothing: auto;
 }
 .button{
-    color: var(--color);
+    background-color: var(--base-color);
+    color: var(--text-color-light);
+    height: 3.5rem;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 2rem;
+    border-radius: 0.25rem;
+    font: 500 1rem 'DM Sans', sans-serif;
+    transition: background 0.3s;
+}
+.button:hover{
+    background: var(--base-color-alt);
+}
+
+.divider-1{
+    height: 1px;
+    background: linear-gradient(
+        270deg, 
+        hsla(var(--hue), 36%, 57%, 1) 0%,
+        hsla(var(--hue), 65%, 88%, 0.34) 100%
+    );
 }
 /* ====== LAYOUT====== */
-#header{
-    border-bottom: 1px solid #e4e4e4;
-    margin-bottom: 2rem;
-}
-nav{
-    height: 4.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.logo{
-    font: 700 1.31rem "Poppins", sans-serif;
-    color: var(--title-color);
-}
-.logo span{
-    /* color: var(--base-color); *//*ESSE NÃO ESTÁ COMO NO VIDEO*/
-    color: rgb(73, 194, 73);/*ESSE NÃO ESTÁ COMO NO VIDEO*/
-}
 .container{
-    width: 100%;
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
@@ -67,14 +75,110 @@ nav{
     display: grid;
     gap: 2rem;
 }
-
-
 section{
     padding: 5rem 0;
 }
+#header{
+    border-bottom: 1px solid #e4e4e4;
+    margin-bottom: 2rem;
+    display: flex;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: var(--body-color);
+    width: 100%;
+}
+main{
+    margin-top: calc(var(--header-height)+ 2rem);
+}
+/*======LOGO======*/
+.logo{
+    font: 700 1.31rem "Poppins", sans-serif;
+    color: var(--title-color);
+}
+.logo span{
+    color: var(--base-color); 
+}
+/*======NAVIGATION======*/
+nav{
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}nav ul.grid{
+    gap: 4rem;
+
+}nav ul li{
+    text-align: center;
+
+}nav ul li a{
+    transition: color 0.3s;
+    position: relative;
+
+}nav ul li a:hover{/*faz animação usando hover, after e hover::after*/
+    color: var(--base-color);
+
+}nav ul li a::after{
+    content: " ";
+    width: 0%;
+    height: 2px;
+    background: var(--base-color);
+
+    position: absolute;
+    left: 0;
+    bottom: -1.5rem;
+
+    transition: width 1.9s;
+}nav ul li a:hover::after{
+    width: 100%;
+}
+
+
+
+
+nav .menu{
+    opacity: 0;
+    visibility: hidden;
+}
+/*=====MOSTRAR MENU*/
+nav.show .menu{
+    opacity: 1;
+    visibility: visible;
+
+    background: var(--body-color);
+
+    height: 100vh;
+    width: 100vw;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+nav.show .menu{
+    display: grid;
+    place-content: center;
+}
+nav.show ul.grid{
+    gap: 4rem;
+}
 /* ======HOME====== */
-#home .container{
+#home{
+    overflow: hidden;
+}
+#home .container{/*esse*/
     margin: 0;
+    position: absolute;
+    width: 21.743rem;
+    height: 15.141rem;
+    left: 2.381rem;
+    top: 2rem;
+
+/* Second color */
+    background: #CCF4E6;
+    border-radius: 4px;
 }
 #home .image{
     position: relative;
@@ -87,7 +191,7 @@ section{
     position: absolute;
     top: -16.8%;
     left: 16.7%;
-    z-index: 1;
+    z-index: 0;
 }
 #home .image img{
     position: relative;
@@ -100,4 +204,41 @@ section{
 #home .text{
     margin-left: 1.5rem;
     margin-right: 1.5rem;
+    text-align: center;
 }
+#home .text h1{
+    margin-bottom: 1rem;
+}
+#home .text p{
+    margin-bottom: 2rem;
+    max-width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
