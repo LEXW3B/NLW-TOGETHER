@@ -200,7 +200,7 @@ nav .menu {
   opacity: 0;
   visibility: hidden;
   top: -20rem;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 nav .menu ul {
