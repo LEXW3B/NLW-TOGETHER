@@ -19,7 +19,7 @@ for(const link of links){
 const header = document.querySelector('#header')
 const navHeight = header.offsetHeight
 
-window.addEventListener('scroll', function(){
+function changeHeaderWhenScroll(){
     if(window.scrollY >= navHeight) {
         //scroll is bigger than the height of the header 
         header.classList.add('scroll')
@@ -27,11 +27,23 @@ window.addEventListener('scroll', function(){
         //scrol is smaller than the height of the header
         header.classList.remove('scroll')
     }
-})
+}
 
-
-
-
+/* testimonials carousel slider swiper */
+const swiper = new Swiper('.swiper-container', {
+    slidesPerView: 1,
+    pagination: {
+      el: '.swiper-pagination'
+    },
+    mousewheel: true,
+    keyboard: true,
+    breakpoints: {
+      767: {
+        slidesPerView: 2,
+        setWrapperSize: true
+      }
+    }
+  })
 
 
 
