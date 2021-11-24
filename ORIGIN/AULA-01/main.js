@@ -61,6 +61,8 @@ scrollReveal.reveal(
      #contact .text, #contact .links
 `, {interval: 100})
 
+/*button back to top*/
+const backToTopButton
 
 
 
