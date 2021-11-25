@@ -194,6 +194,7 @@ nav ul li a::after {
 nav ul li a:hover::after,
 nav ul li a.active::after {
   width: 100%;
+  
 }
 
 nav .menu {
@@ -581,6 +582,7 @@ footer .social a:hover {
   nav .icon-menu {
     display: none;
   }
+  
 
   /* layout */
   main {
